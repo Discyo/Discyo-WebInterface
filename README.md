@@ -5,7 +5,7 @@ This is a [FastAPI](https://fastapi.tiangolo.com/) web app made as a part of [Di
 
 ## Configuration and Setup
 
-Before running the WebInterface, it's essential to configure the required environment variables. In the ./web_interface/app/config.py file, please set the following:
+Before running the WebInterface, it's essential to configure the required environment variables. In the `web_interface/app/config.py` file, please set the following:
 
 - `WAPITCH_BASE_URL`: Replace with the appropriate base URL for the Wapitch API.
 - `RAPI_BASE_URL`: Replace with the appropriate base URL for the Recommendation API.
