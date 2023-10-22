@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  web-interface:
+    build:
+      context: ./web_interface
+      dockerfile: web_interface.dockerfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "8M"
+        max-file: "4"

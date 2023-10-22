@@ -1,0 +1,128 @@
+<!doctype html>
+<!--
+Copyright (C) 2023  Petr Buchal, Vladimír Jeřábek, Martin Ivančo
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="WAPITCH_BASE_URL" content="{{ WAPITCH_BASE_URL }}">
+      <meta property="og:type" content="website"/>
+      <meta property="og:title" content="{{title}}"/>
+      <meta property="og:image" content="/static/images/discyo.png"/>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="shortcut icon" href="/static/images/discyo.png" type="image/x-icon">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+      {{ JSGlue.include() }}
+      <style>
+         .testimonial-group > .row {
+         overflow-x: auto;
+         white-space: nowrap;
+         }
+         .testimonial-group > .row > .col-xs-4 {
+         display: inline-block;
+         float: none;
+         }
+      </style>
+      <script>
+         function hideFooter() {
+             let footer = document.getElementsByClassName('footer mt-auto py-3 bg-light')[0];
+             footer.style.display = 'none';
+           }
+      </script>
+      <title>{{title}}</title>
+   </head>
+   <body style="background: rgb(0,0,0); background: linear-gradient(351deg, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%); min-height: 100vh;">
+      <div class="container mh-100" style="color: floralwhite;">
+         <div class="row" style="padding-top: 15px;">
+            <div class="col-sm-3">
+               <img class="content-poster" style="width: inherit; border-radius: 4%;">
+            </div>
+            <div class="col-sm-6">
+               <h3 tmdb_id="{{tmdb_id}}" wapitch_id="{{wapitch_id}}" style="margin-top: 5px;" class="content-title"></h3>
+               <h5 style="margin-bottom: 20px;"><span class="content-year"></span><span class="content-runtime"></span><span class="content-genres"></span></h5>
+               <h6 class="localization created-by" style="margin-bottom: 0px;"></h6>
+               <h5 class="content-creator"></h5>
+               <a class="content-trailer" target="_blank"><button type="button" class="btn btn-secondary" style="margin-top: 10px;margin-bottom: 18px;"><i class="fa fa-play"></i>&nbsp;&nbsp;Trailer</button></a>
+               <p class="content-description"></p>
+            </div>
+         </div>
+      </div>
+      <div class="container testimonial-group" style="margin-top:20px; text-align: left!important;">
+         <div class="row cast" style="display: inherit; color: floralwhite;">
+         </div>
+      </div>
+      {% if providers %}
+      <div class="container testimonial-group" style="margin-top:20px;">
+         <div class="row text-center">
+            <div style="padding-right: 10px; width: 125px; padding-left: 15px; padding-bottom: 5px; color: darkgrey; text-align: left;" class="col-xs-4 localization watch-on"></div>
+         </div>
+         <div class="row text-center">
+            {% for i, provider in providers %}
+            {% if i == 0 %}
+            <div style="padding-left: 15px;" class="col-xs-4"><a href="{{provider['url']}}" target="_blank"><img width="46" height="46" src="/static/images/{{provider['id']}}.png"></a></div>
+            {% else %}
+            <div style="padding-left: 10px;" class="col-xs-4"><a href="{{provider['url']}}" target="_blank"><img width="46" height="46" src="/static/images/{{provider['id']}}.png"></a></div>
+            {% endif %}
+            {% endfor %}
+         </div>
+      </div>
+      {% endif %}
+      {% if similar %}
+      <div class="container testimonial-group" style="margin-top:20px; text-align: left!important;">
+         <div class="row text-center">
+            <div style="padding-right: 10px; width: 125px; padding-left: 15px; padding-bottom: 5px; color: darkgrey; text-align: left" class="col-xs-4 localization fans-also-like"></div>
+         </div>
+         <div class="row" style="display: inherit; color: floralwhite;">
+            {% for content in similar %}
+            <div style="display: inline-grid; padding-left: 15px;" class="col-xs-4"><a href="/show/{{content['id']}}"><img style="border-radius: 4%;" class="similar-content" tmdb_id="{{content['tmdb_id']}}" class="rounded-circle" height="200"></a></div>
+            {% endfor %}
+         </div>
+      </div>
+      {% endif %}
+      <footer class="footer mt-auto py-3" style="width: 100%; position: relative; bottom: 0;">
+         <div class="container" style="color: darkgrey;">
+            <span><span class="localization info-credit">Information provided by </span><a href="https://www.themoviedb.org/" target="_blank"><img src="/static/images/tmdb.png" style="height: 14.1px; padding-bottom: 1px;"></a>, </span><span><span class="localization from-company"></span></span>
+         </div>
+      </footer>
+      <footer class="footer mt-auto py-3 bg-light" style="position: fixed; width: 100%; bottom: 0;">
+         <div class="container">
+            <div style="position:absolute; right: 12px;">
+               <button type="button" class="btn btn-link text-muted" onclick="hideFooter()"><i class="fa fa-times"></i></button>
+            </div>
+         </div>
+         <div class="container">
+            <div class="row">
+               <div style="display: flex; align-items: center; margin-left: 20px;">
+                  <h5 style="margin-bottom: 0px;" class="text-muted localization download"></h5>
+               </div>
+               <div style="display: -webkit-inline-box;">
+                  <div style="max-width: 113px; margin-left: 20px;">
+                     <a href=""><img style="width: 100%; margin-top: 6px;" src="/static/images/app-store.svg"></a>
+                  </div>
+                  <div style="max-width: 113px; margin-left: 20px;">
+                     <a href=""><img style="width: 100%; margin-top: 6px;" src="/static/images/play-store.svg"></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+   </body>
+   <script type="text/javascript" src="/static/localization/cs.js"></script>
+   <script type="text/javascript" src="/static/localization/en.js"></script>
+   <script src="/static/js/show-loader.js"></script>
+</html>
