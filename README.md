@@ -1,5 +1,5 @@
 # WebInterface
-This is a [FastAPI](https://fastapi.tiangolo.com/) web app made as a part of [Discyo](https://discyo.com/) - a cross-media recommendation platform project.
+This is a [Flask](https://flask.palletsprojects.com/en/3.0.x/) web app made as a part of [Discyo](https://discyo.com/) - a cross-media recommendation platform project.
 
 <img src="./docs/images/example.png"/>
 
